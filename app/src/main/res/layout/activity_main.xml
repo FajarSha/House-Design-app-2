@@ -68,16 +68,16 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/adLayout"
             app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+
                 android:gravity="center"
                 android:orientation="vertical"
+                android:padding="30dp"
                 android:weightSum="3">
 
 
@@ -86,6 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
+                    android:layout_weight="1"
                     android:elevation="12dp"
                     app:cardCornerRadius="20dp">
 
@@ -99,7 +100,7 @@
                         <ImageView
                             android:id="@+id/imageView5"
                             android:layout_width="85dp"
-                            android:layout_height="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/twod_img" />
 
@@ -126,7 +127,7 @@
                                 android:id="@+id/textView4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:text="Sketch View"
                                 android:textColor="@color/txt_light"
                                 android:textSize="12sp" />
@@ -139,13 +140,7 @@
                                 android:textColor="@color/txt_light"
                                 android:textSize="12sp" />
 
-                            <!--  <TextView
-                                  android:id="@+id/textView5"
-                                  android:layout_width="match_parent"
-                                  android:layout_height="wrap_content"
-                                  android:text="Black and White"
-                                  android:textColor="@color/txt_light"
-                                  android:textSize="12sp" />-->
+
                         </LinearLayout>
 
                     </LinearLayout>
@@ -157,6 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
+                    android:layout_weight="1"
                     android:elevation="12dp"
                     app:cardCornerRadius="20dp">
 
@@ -170,7 +166,7 @@
                         <ImageView
                             android:id="@+id/threed"
                             android:layout_width="85dp"
-                            android:layout_height="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/threed_img" />
 
@@ -220,8 +216,8 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:elevation="12dp"
-
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -234,7 +230,7 @@
                         <ImageView
                             android:id="@+id/makeImg"
                             android:layout_width="85dp"
-                            android:layout_height="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/make_img" />
 
@@ -260,6 +256,29 @@
             </LinearLayout>
         </LinearLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/adLayout"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/light_gre"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:padding="2dp"
+                android:text="Ads"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintTop_toTopOf="@+id/adLayout"
+                tools:ignore="MissingConstraints">
+
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

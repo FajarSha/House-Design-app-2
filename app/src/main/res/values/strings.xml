@@ -11,7 +11,6 @@
     <string name="lounge">Lounge</string>
 
 
-
     <string name="stairs">Stair</string>
     <string name="t_shape">T shape</string>
     <string name="l_shape">L shape</string>
@@ -29,5 +28,24 @@
     <string name="second">Second</string>
     <string name="third">Third</string>
     <string name="four">Four</string>
+    <!--    Test ADs-->
+    <string name="app_ad_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="app_open_highid">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="app_open_mediumid">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="app_open_lowid">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="app_banner_highid">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="app_banner_mediumid">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="app_banner_lowid">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="app_interstitial_highid">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="app_interstitial_mediumid">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="app_interstitial_lowid">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="app_native_highid">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="app_native_mediumid">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="app_native_lowid">ca-app-pub-3940256099942544/2247696110</string>
+
+    <string name="native1">native</string>
+    <string name="interstial">Interstitial</string>
+    <string name="Banner">Banner</string>
+    <string name="in_app_purchase">removeAds_housedesign_app</string>
 
 </resources>

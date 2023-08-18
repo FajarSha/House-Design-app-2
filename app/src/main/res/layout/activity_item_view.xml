@@ -70,8 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/adLayout"
             app:layout_constraintTop_toBottomOf="@+id/topBar_layout">
 
             <com.ortiz.touchview.TouchImageView
@@ -88,7 +88,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--     <androidx.constraintlayout.widget.ConstraintLayout
+             <androidx.constraintlayout.widget.ConstraintLayout
                  android:id="@+id/adLayout"
                  android:layout_width="match_parent"
                  android:layout_height="52dp"
@@ -110,7 +110,7 @@
                      tools:ignore="MissingConstraints">
 
                  </TextView>
-             </androidx.constraintlayout.widget.ConstraintLayout>-->
+             </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

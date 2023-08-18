@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "House Design"
 include ':app'
+include ':nativetemplates'
