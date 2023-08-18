@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.housedesign'
+    namespace 'com.housedesign.houseplans.homedesign.floorplancreator.designhome.homeinterior.roomplanner'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.housedesign"
+        applicationId "com.housedesign.houseplans.homedesign.floorplancreator.designhome.homeinterior.roomplanner"
         minSdk 24
         targetSdk 33
         versionCode 1
