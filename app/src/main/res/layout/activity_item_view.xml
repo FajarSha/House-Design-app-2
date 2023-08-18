@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/MainRoundedbg"
+    tools:context=".itemViewActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+
+        <LinearLayout
+            android:id="@+id/topBar_layout"
+            android:layout_width="match_parent"
+
+            android:layout_height="75dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/topBar"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:background="@drawable/blue_rounded"
+                android:orientation="horizontal"
+                android:padding="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="1dp">
+
+                <ImageView
+                    android:id="@+id/previous_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="8dp"
+
+                    app:srcCompat="@drawable/back_arrow" />
+
+                <TextView
+                    android:id="@+id/maintitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Home Design"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/vipads"-->
+                <!--                    android:layout_width="32dp"-->
+                <!--                    android:layout_height="32dp"-->
+                <!--                    android:layout_marginRight="8dp"-->
+                <!--                    app:srcCompat="@drawable/ad_btn" />-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/house_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topBar_layout">
+
+            <com.ortiz.touchview.TouchImageView
+                android:id="@+id/house_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="house Image"
+                android:padding="20dp"
+                android:src="@drawable/item_img"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="20dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--     <androidx.constraintlayout.widget.ConstraintLayout
+                 android:id="@+id/adLayout"
+                 android:layout_width="match_parent"
+                 android:layout_height="52dp"
+                 android:background="@color/light_gre"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintHorizontal_bias="0.0"
+                 app:layout_constraintStart_toStartOf="parent">
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="4dp"
+                     android:padding="2dp"
+                     android:text="Ads"
+                     android:textColor="@color/black"
+                     android:textSize="10sp"
+                     app:layout_constraintTop_toTopOf="@+id/adLayout"
+                     tools:ignore="MissingConstraints">
+
+                 </TextView>
+             </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
