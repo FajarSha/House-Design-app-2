@@ -20,9 +20,6 @@
             android:icon="@drawable/more"
             android:title="More App" />
 
-        <item
-            android:id="@+id/terms"
-            android:icon="@drawable/version"
-            android:title="Versions" />
+
     </group>
 </menu>

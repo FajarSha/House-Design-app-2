@@ -13,5 +13,7 @@
     <color name="cardbg_light">#EEEDED</color>
     <color name="white_gary">#F5F4F2 </color>
     <color name="light_gre">#a5a8ac</color>
+    <color name="dot_sel">#3867F5</color>
+    <color name="dot_unsel">#D9D9D9</color>
 
 </resources>

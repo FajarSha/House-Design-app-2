@@ -108,11 +108,11 @@ public class ResourceData {
 
     private void threeDDatatValue() {
         arrayList=new ArrayList<>();
-        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.front), R.drawable.front));
-        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.bedroom), R.drawable.bedrroom));
-        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.kitchen), R.drawable.kitchen));
-        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.bathroom), R.drawable.bathroom));
-        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.lounge), R.drawable.lounge));
+        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.front), R.drawable.temp_3d_f1));
+        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.bedroom), R.drawable.temp_3d_b1));
+        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.kitchen), R.drawable.temp_3d_k10));
+        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.bathroom), R.drawable.temp_3d_bb10));
+        arrayList.add(new HouseModal(context.getString(R.string.threed), context.getString(R.string.lounge), R.drawable.temp_3d_l4));
     }
 
     private void twoDDatatValue() {

@@ -7,20 +7,35 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.ads.nativetemplates.NativeTemplateStyle;
 import com.google.android.ads.nativetemplates.TemplateView;
@@ -52,8 +67,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int adcount = 1;
     InAppBilling inAppBilling;
     AlertDialog alertDialog;
-    boolean isInAppPurchased=false;
+    boolean isInAppPurchased = false;
     TemplateView templateView;
+    Dialog adBlockdialog,exitDialog;
+    CardView subBtn;
+    boolean isDisplayed = false;
+    ImageView adBtn;
+    private SharedPreferences sharedPreferences;
+    private boolean showDialog = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +85,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         openDrawerBtn.setOnClickListener(view -> {
             drawerLayout.openDrawer(navigationView);
         });
+        AdblockingDialogue();
         navigationView.setItemIconTintList(null);
         twoDTemplate.setOnClickListener(this);
         threeDtemplate.setOnClickListener(this);
         makeYourtemplate.setOnClickListener(this);
+        adBtn.setOnClickListener(this);
+
+
+//
+
 
     }
 
@@ -79,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         threeDtemplate = findViewById(R.id.threedcard);
         makeYourtemplate = findViewById(R.id.makecard);
         adLayout = findViewById(R.id.adLayout);
+        adBtn = findViewById(R.id.ad_btn);
 
     }
 
@@ -109,21 +138,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=PeriStudio")));
                 break;
             case R.id.privacy_policy:
-            case R.id.terms:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://sites.google.com/view/peri-studio-privacy-policy/privacy-policy?pli=1")));
                 break;
             default:
         }
 
         drawerLayout.closeDrawers();
-        return false;
+        return true;
     }
 
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        alertDialog.show();
-       // finishAffinity();
+        if (drawerLayout.isOpen()) {
+            drawerLayout.closeDrawers();
+        } else {
+            exitDialog.show();
+        }
+        // finishAffinity();
     }
 
     @Override
@@ -139,6 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.makecard:
                 AdCount(3);
                 break;
+            case R.id.ad_btn:
+                AdblockingDialogue();
+                adBlockdialog.show();
+                break;
             default:
                 break;
         }
@@ -147,12 +183,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        inAppBilling = new InAppBilling(this
-                , this);
+        inAppBilling = new InAppBilling(this, this);
         inAppBilling.InappCalling();
+//        inAppBilling.savePurchaseValueToPref(true);
 //        inAppBilling.savePurchaseValueToPref(false);
         isInAppPurchased = inAppBilling.hasUserBoughtInApp();
-        loadBannerAd();
+        if (isInAppPurchased) {
+            adLayout.setVisibility(View.GONE);
+            adBtn.setVisibility(View.GONE);
+        } else {
+            adLayout.setVisibility(View.VISIBLE);
+            adBtn.setVisibility(View.VISIBLE);
+            loadBannerAd();
+            if (!isDisplayed) {
+                adBlockdialog.show();
+            }
+        }
         is_High_called = true;
         is_Medium_Called = false;
         isthirdCalled = false;
@@ -310,19 +356,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void AdCount(int val) {
         if (adcount % 2 == 1) {
-//            if (!isInAppPurchased) {
-            laodinterstialAd(val);
-            loadingAdDialog();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (progressDialog.isShowing()) {
-                        progressDialog.dismiss();
+            if (!isInAppPurchased) {
+                laodinterstialAd(val);
+                loadingAdDialog();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
                     }
-                }
-            }, 2500L);
-//            }
-
+                }, 2500L);
+            } else {
+                changeActivity(val);
+            }
         } else {
             changeActivity(val);
         }
@@ -330,20 +377,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loadingAdDialog() {
-        progressDialog = ProgressDialog.show(this, "",
-                "Loading Ads Please wait...", true);
+        progressDialog = ProgressDialog.show(this, "", "Loading Ads Please wait...", true);
     }
 
     private void showNativeAd(String unitId, boolean forhigh, boolean formedium, boolean forlow, String Value) {
 //        View view1 = getLayoutInflater().inflate(R.layout.native_dialog, null);
 //        bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
 //        bottomSheetDialog.setContentView(view1);
+        exitDialog=new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar);
         View view1 = LayoutInflater.from(this).inflate(R.layout.exit_dialouge, null);
+        exitDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        exitDialog.setContentView(view1);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(view1);
-        alertDialog = builder.create();
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        Window window = exitDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.gravity = Gravity.CENTER;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
+        window.setAttributes(wlp);
+        exitDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setView(view1);
+//        alertDialog = builder.create();
+//        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
         templateView = view1.findViewById(R.id.nativeAds_template);
 
@@ -353,68 +409,121 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             templateView.setVisibility(View.VISIBLE);
         }
-        ImageView yesBtn,NoBtn;
-        yesBtn=view1.findViewById(R.id.yesbtn);
-        NoBtn=view1.findViewById(R.id.nobtn);
+        CardView yesBtn, NoBtn;
+        yesBtn = view1.findViewById(R.id.yesBtn);
+        NoBtn = view1.findViewById(R.id.Nobtn);
 
         yesBtn.setOnClickListener(view -> {
-            if (alertDialog.isShowing()) {
-                alertDialog.dismiss();
+            if (exitDialog.isShowing()) {
+                exitDialog.dismiss();
             }
 
             finishAffinity();
         });
         NoBtn.setOnClickListener(view -> {
-            alertDialog.dismiss();
+            exitDialog.dismiss();
         });
 
 //        Native_adLayout = view1.findViewById(R.id.native_adLayout);
         if (!isInAppPurchased) {
-            AdLoader adLoader = new AdLoader.Builder(this, unitId)
-                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                        @Override
-                        public void onNativeAdLoaded(NativeAd nativeAd) {
-                            NativeTemplateStyle style = new NativeTemplateStyle.Builder().build();
-                            templateView.setStyles(style);
-                            templateView.setNativeAd(nativeAd);
-                            templateView.setVisibility(View.VISIBLE); // Show the TemplateView since the ad is loaded
+            AdLoader adLoader = new AdLoader.Builder(this, unitId).forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                @Override
+                public void onNativeAdLoaded(NativeAd nativeAd) {
+                    NativeTemplateStyle style = new NativeTemplateStyle.Builder().build();
+                    templateView.setStyles(style);
+                    templateView.setNativeAd(nativeAd);
+                    templateView.setVisibility(View.VISIBLE); // Show the TemplateView since the ad is loaded
 
-                            setprority(forhigh, formedium, forlow, getString(R.string.native1));
-                        }
-                    })
-                    .withAdListener(new AdListener() {
-                        @Override
-                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                            super.onAdFailedToLoad(loadAdError);
-                            if (!forlow) {
-                                checkprority(forhigh, formedium, forlow, Value, 0);
-                            } else if (forlow && !isthirdCalled) {
+                    setprority(forhigh, formedium, forlow, getString(R.string.native1));
+                }
+            }).withAdListener(new AdListener() {
+                @Override
+                public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                    super.onAdFailedToLoad(loadAdError);
+                    if (!forlow) {
+                        checkprority(forhigh, formedium, forlow, Value, 0);
+                    } else if (forlow && !isthirdCalled) {
 
-                                Log.d(TAG, "onAdFailedToLoad: Native Ad" + loadAdError);
-                                checkprority(forhigh, formedium, forlow, Value, 0);
-                                isthirdCalled = true;
+                        Log.d(TAG, "onAdFailedToLoad: Native Ad" + loadAdError);
+                        checkprority(forhigh, formedium, forlow, Value, 0);
+                        isthirdCalled = true;
 //                          templateView.setVisibility(View.GONE);
-                            }
-                        }
+                    }
+                }
 
-                        @Override
-                        public void onAdLoaded() {
-                            super.onAdLoaded();
-                        }
-                    })
-                    .build();
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                }
+            }).build();
             adLoader.loadAd(new AdRequest.Builder().build());
         }
 
     }
 
+    private void AdblockingDialogue() {
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_scale);
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.REVERSE);
 
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//        Log.d(TAG, "onConfigurationChanged: "+newConfig);
-//        mainRoundedBg.setBackgroundResource(R.drawable.darktop_rounded_drawable);
-//        // Dismiss the ad-blocking dialog if it's showing
-//
-//    }
+        adBlockdialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar);
+        View view1 = getLayoutInflater().inflate(R.layout.purchase_layout, null);
+        adBlockdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        adBlockdialog.setContentView(view1);
+        Window window = adBlockdialog.getWindow();
+
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        TextView closebtn = view1.findViewById(R.id.cross_btn);
+        subBtn = view1.findViewById(R.id.subscribeNow);
+        subBtn.startAnimation(animation);
+
+        closebtn.setOnClickListener(view -> {
+            isDisplayed = true;
+            if (adBlockdialog != null) {
+                if (adBlockdialog.isShowing()) {
+                    adBlockdialog.dismiss();
+                }
+            }
+        });
+        subBtn.setOnClickListener(view -> {
+            inAppBilling.purchase(view);
+        });
+        wlp.gravity = Gravity.CENTER;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
+        window.setAttributes(wlp);
+        adBlockdialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+    }
+
+
+    @SuppressLint("ResourceType")
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Log.d(TAG, "onConfigurationChanged: " + newConfig);
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        Menu menu = navigationView.getMenu();
+
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_NO) {
+            //for light
+            mainRoundedBg.setBackgroundResource(R.drawable.top_rounded_drawable);
+            makeYourtemplate.setCardBackgroundColor(ContextCompat.getColor(this, R.color.white));
+            twoDTemplate.setCardBackgroundColor(ContextCompat.getColor(this, R.color.white));
+            threeDtemplate.setCardBackgroundColor(ContextCompat.getColor(this, R.color.white));
+            navigationView.setBackgroundColor(ContextCompat.getColor(this, R.color.white)); // Set the new color
+            navigationView.setItemTextColor(ContextCompat.getColorStateList(this, R.color.black));
+
+
+        } else {
+            // for night
+            mainRoundedBg.setBackgroundResource(R.drawable.darktop_rounded_drawable);
+            makeYourtemplate.setCardBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            twoDTemplate.setCardBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            threeDtemplate.setCardBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            navigationView.setBackgroundColor(ContextCompat.getColor(this, R.color.light_black)); // Set the new color
+            navigationView.setItemTextColor(ContextCompat.getColorStateList(this, R.color.white));
+        }
+        isDisplayed = true;
+
+    }
+
 }

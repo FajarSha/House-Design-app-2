@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -16,6 +17,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
+import com.housedesign.houseplans.homedesign.floorplancreator.designhome.homeinterior.roomplanner.Ad_Util.InAppBilling;
 import com.ortiz.touchview.TouchImageView;
 
 public class itemViewActivity extends AppCompatActivity {
@@ -28,6 +30,8 @@ public class itemViewActivity extends AppCompatActivity {
     TouchImageView touchImageView;
     ConstraintLayout adLayout;
     ImageView backArrowBtn;
+    InAppBilling inAppBilling;
+    boolean isInAppPurchased;
     boolean is_High_called = false, is_Medium_Called = false, ishighDisplay = false, isMediumDisaplay = false, isthirdCalled = false;
 
 
@@ -66,7 +70,16 @@ public class itemViewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadBannerAd();
+        inAppBilling = new InAppBilling(this, this);
+        inAppBilling.InappCalling();
+//        inAppBilling.savePurchaseValueToPref(false);
+        isInAppPurchased = inAppBilling.hasUserBoughtInApp();
+        if(isInAppPurchased){
+            adLayout.setVisibility(View.GONE);
+        }else {
+            adLayout.setVisibility(View.VISIBLE);
+            loadBannerAd();
+        }
     }
 
     public void loadBannerAd() {

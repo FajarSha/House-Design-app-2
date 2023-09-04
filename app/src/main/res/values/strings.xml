@@ -48,4 +48,8 @@
     <string name="Banner">Banner</string>
     <string name="in_app_purchase">removeAds_housedesign_app</string>
 
+    <string name="threedstr">Realistic 3D House Ideas With Multiple Options</string>
+    <string name="makestr">Make Your Own House Plan At Your Own Style</string>
+    <string name="twodstr">Realistic Maps And Layout For Modern House Design</string>
+
 </resources>

@@ -45,7 +45,11 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
+            <ImageView
+                android:id="@+id/ad_btn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/btn_ad" />
 
         </LinearLayout>
 
