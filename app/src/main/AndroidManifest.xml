@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
+        android:name=".Ad_Util.MyApplication"
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,16 +21,23 @@
         android:theme="@style/Theme.HouseDesign"
         tools:targetApi="31">
         <activity
+            android:name=".TutorialActivity"
+            android:exported="false" />
+        <activity
             android:name=".DragableActivity"
+            android:configChanges="uiMode"
             android:exported="false" />
         <activity
             android:name=".itemViewActivity"
+            android:configChanges="uiMode"
             android:exported="false" />
         <activity
             android:name=".itemActivity"
+            android:configChanges="uiMode"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
+            android:configChanges="uiMode"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -38,9 +49,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"
             android:configChanges="uiMode"
-            />
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/app_ad_id" />

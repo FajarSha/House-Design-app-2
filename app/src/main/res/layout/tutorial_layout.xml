@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="How to use"
+        android:text="@string/how"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
 
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,30 +53,30 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card1"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_margin="4dp"
                 android:elevation="0dp"
                 app:cardBackgroundColor="@color/black"
-                app:cardCornerRadius="16dp" />
+                app:cardCornerRadius="12dp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card2"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_margin="4dp"
                 android:elevation="0dp"
                 app:cardBackgroundColor="@color/black"
-                app:cardCornerRadius="16dp" />
+                app:cardCornerRadius="12dp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card3"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_margin="4dp"
                 android:elevation="0dp"
                 app:cardBackgroundColor="@color/black"
-                app:cardCornerRadius="16dp" />
+                app:cardCornerRadius="12dp" />
 
         </LinearLayout>
 

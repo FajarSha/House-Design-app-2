@@ -67,7 +67,7 @@
 
         <LinearLayout
             android:id="@+id/rounded_layout"
-            style="@style/MainRoundCorner"
+       android:background="@drawable/top_rounded_drawable"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
@@ -81,16 +81,18 @@
 
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="30dp"
+               android:layout_marginTop="15dp"
                 android:weightSum="3">
 
 
+<!--
                 <androidx.cardview.widget.CardView
                     android:id="@+id/twodcard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
                     android:elevation="12dp"
                     app:cardCornerRadius="20dp">
 
@@ -104,7 +106,7 @@
                         <ImageView
                             android:id="@+id/imageView5"
                             android:layout_width="85dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/twod_img" />
 
@@ -131,7 +133,7 @@
                                 android:id="@+id/textView4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
+
                                 android:text="Sketch View"
                                 android:textColor="@color/txt_light"
                                 android:textSize="12sp" />
@@ -157,6 +159,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
+
                     android:elevation="12dp"
                     app:cardCornerRadius="20dp">
 
@@ -170,7 +174,7 @@
                         <ImageView
                             android:id="@+id/threed"
                             android:layout_width="85dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/threed_img" />
 
@@ -195,7 +199,7 @@
                                 android:id="@+id/threed_sub1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+
                                 android:text="Realstic View"
                                 android:textColor="@color/txt_light"
                                 android:textSize="12sp" />
@@ -217,7 +221,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/makecard"
-
+                    app:cardBackgroundColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -234,7 +238,7 @@
                         <ImageView
                             android:id="@+id/makeImg"
                             android:layout_width="85dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/make_img" />
 
@@ -256,7 +260,27 @@
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
+                <ImageView
+                    android:id="@+id/twodcard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/two_img" />
+
+                <ImageView
+                    android:id="@+id/threedcard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/three_img" />
+
+                <ImageView
+                    android:id="@+id/makecard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/make_img" />
             </LinearLayout>
         </LinearLayout>
 
@@ -287,7 +311,7 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView_drawer"
-        style="@style/MainRoundedbg"
+   android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

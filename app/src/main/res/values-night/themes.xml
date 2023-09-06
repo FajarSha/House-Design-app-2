@@ -21,9 +21,7 @@
     <style name="MainRoundCorner">
         <item name="android:background">@drawable/darktop_rounded_drawable</item>
     </style>
-    <style name="TwoD">
-        <item name="android:background">@drawable/dark_twod </item>
-    </style>
+
     <style name="ItemText">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "790391866920",
+    "project_id": "house-app-2",
+    "storage_bucket": "house-app-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790391866920:android:ff7e369d766e98c0fe571d",
+        "android_client_info": {
+          "package_name": "com.housedesign.houseplans.homedesign.floorplancreator.designhome.homeinterior.roomplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790391866920-l97ne4ahqspadv4ac4kfk8u7hd5rlto5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2TM0JT9srX2RMtIebirKRXlI4dDrIT7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790391866920-l97ne4ahqspadv4ac4kfk8u7hd5rlto5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
